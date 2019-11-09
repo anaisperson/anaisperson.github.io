@@ -56,6 +56,7 @@ function draw() {
         } // sinon loseGame
         else {
           console.log("loseGame")
+          gameover = true;
           //looseGame();
         }
 
@@ -89,6 +90,13 @@ function animLoop() {
 
   if (!gameover) {
     requestAnimationFrame(animLoop);
+  } else {
+    console.log(`gameover final`);
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = "50px Arial";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("game over", W/2, H/2);
   }
 }
 
