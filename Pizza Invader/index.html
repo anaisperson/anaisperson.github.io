@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Super Bonne Pizza Invader</title>
+ <link rel="stylesheet" href="pizza-invader.css">
+
+</head>
+
+<body>
+
+    <header>
+      <h1 id="title">Super Bonne Pizza Invader</h1>
+    </header>
+
+    <!--- Cliquer sur le bouton Start Invasion pour lancer le jeu et le décompte -->
+    <div class="game-intro">
+      <button id="start-button">Start Invasion</button>
+      <p>Use the up and down arrow to control the pizza!</p>
+    </div>
+
+    <!--- Espace de jeu -->
+    <div id="game-board">
+      <canvas width="1200" height="500"> </canvas>
+    </div>
+
+    <!--- Recette -->
+    <div id="recette"> </div>
+    
+    <!---
+     <div id="gameover">
+      <div style="display:flex; justify-content:center; align-items:center;">
+          <img style="width: 300px; margin-right: 40px" src="images/loser-gif.gif" />
+          <p> <span style="font-size: 120px;">GAME OVER</span><br /> </p>
+      </div>
+    </div> -->
+
+    <!--- Documents reliés -->
+    <script src="pizza-invader.js"></script>
+    <script src="obstacles.js"></script>
+    <script src="main.js"></script>
+    
+    
+</body>
+</html>

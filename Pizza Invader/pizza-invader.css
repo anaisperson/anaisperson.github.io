@@ -1,0 +1,64 @@
+body{
+    background-color: black;
+    font-size: 18px;
+    font-family: "Verdana";
+    color: white;
+}
+
+#title {
+    text-align: center;
+}
+
+#game-board {
+    padding: 20px 0px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 1200px;
+}
+
+#game-board {position:relative;}
+#game-board canvas {
+    border:1px solid yellow;
+}
+
+.game-intro {
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+}
+
+/*#lost
+{
+    display: none;
+    font-weight: 900;
+    color: rgb(255, 154, 0);
+    opacity: 90%;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    background-color: #242733;
+    height: 420px;
+    padding-top: 130px;
+}
+
+/*#pizza-invader {
+    width: 25px;
+    height: 25px;
+    background-image: url("images/pizza-invader.png");
+}
+
+#recette {
+    background-color: greenyellow;
+    font-size: 12px;
+    font-family: "Oswald";
+    color: black;
+    padding: 20px 0px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 1200px;
+}
