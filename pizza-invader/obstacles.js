@@ -14,15 +14,17 @@ class Obstacle {
       this.y = H/2-this.h/2;
     }   
 
-    img.src = "images/" + ingredient + ".png";;
+// Relier chaque ingrédient à son image
+    img.src = "images/" + ingredient + ".png";
   }
 
+// Faire apparaître les ingrédients obstacles
   paint() {
     if (!this.img) return;
     ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   }
 
-
+// Détection des collisions
   hits(pizza) {
     return (
       (pizza.x+pizza.w >= this.x && pizza.x <= this.x+this.w)
@@ -31,14 +33,3 @@ class Obstacle {
     );
   }
 }
-
-// function looseGame()
-// {
-//     stopGame();
-//     gameStatus = "gameLost";
-
-//     displayScore.innerHTML = score;
-//     lost.style.display = "block";
-//     pauseButton.style.display = "none";
-//     restartButton.style.display = "block";
-// }

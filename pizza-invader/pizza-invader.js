@@ -2,7 +2,6 @@ class PizzaInvader {
   constructor() {
     const img = document.createElement('img');
     img.onload = () => {
-      // Une fois que l'image est chargée
       this.img = img;
 
       const imgRatio = img.naturalWidth/img.naturalHeight;

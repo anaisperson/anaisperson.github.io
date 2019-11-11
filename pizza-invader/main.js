@@ -13,7 +13,6 @@ let recette = [];
 let stopgame;
 let win;
 let caughtedIngredients = [];
-//const lost = document.getElementById("lost");
 
 let frames = 0;
 
@@ -29,9 +28,8 @@ function draw() {
   // Générer une recette aléatoire à partir du tableau des ingrédients
 
   if (frames % 100 === 0) {
-    let ingredient = ingredients[Math.floor(Math.random() * 7)];
+    let ingredient = ingredients[Math.floor(Math.random() * 8)];
     obstacles.push(new Obstacle(ingredient));
-    // recette.push(ingredient);
   }
 
   // Obstacles
@@ -40,20 +38,15 @@ function draw() {
     obstacle.paint();
 
     // 1. détecter la collision
-    
-
     obstacles.forEach(function (obstacle, index) {
       let crashed = obstacle.hits(pizza);
-      if (crashed) {
-        console.log("crashed");
 
+      if (crashed) {
         // si l'obstacle avec lequel ca vient de crasher correspond à un ingredient de la liste (obstacle.ingredient doit etre dans la recette)
         if (recette.includes(obstacle.ingredient)) {
-          console.log("continue")
           if (!caughtedIngredients.includes(obstacle.ingredient)) {
             caughtedIngredients.push(obstacle.ingredient); 
           }
-          console.log("caughtedIngredients: ", caughtedIngredients);
 
           caughtedIngredients = caughtedIngredients.sort(function (a, b) {
             return a.localeCompare(b);
@@ -67,22 +60,18 @@ function draw() {
             stopgame = true;
             win = true;
           }
-          //stopgame = false;
-        } // sinon loseGame
-        else {
-          console.log("loseGame")
+        } else {
           stopgame = true;
-          //looseGame();
         }
 
         obstacles.splice(index, 1);
       }
     });
-    console.log(obstacle.hits(pizza));
   });
 }
 
-//Faire bouger la pizza
+//Faire bouge+r la pizza
+
 document.onkeydown = function(e) {
   switch (e.keyCode) {
     case 38: // up arrow
@@ -94,8 +83,7 @@ document.onkeydown = function(e) {
   }
 };
 document.onkeyup = function(e) {
-  //player.speedX = 100;
-  //player.speedY = 100;
+
 };
 
 function animLoop() {
@@ -103,57 +91,47 @@ function animLoop() {
 
   draw();
 
+  // Quand le jeu est perdu
+
   if (!stopgame) {
     requestAnimationFrame(animLoop);
   } else {
-    console.log('stopgame final');
     ctx.clearRect(0, 0, W, H);
     ctx.font = "50px Arial";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("game over", W/2, H/2);
+    ctx.fillText(" 🔥👎 GAME OVER !!! 👎🔥", W/2, H/2);
   }
 
+// Quand le jeu est gagné
+
   if (stopgame && win) {
-    console.log('win');
-      ctx.clearRect(0, 0, W, H);
-      ctx.font = "50px Arial";
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
-      ctx.fillText("You're a real pizzaiolo !", W/2, H/2);
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = "50px Arial";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("🇮🇹🍕❤️ You're a real pizzaiolo !❤️ 🍕🇮🇹 ", W/2, H/2);
   }
 }
 
+// Start Game
 
-
+// Générer une pizza
 function startGame() {
   pizza = new PizzaInvader(); // 🍕
 
+  // Générer une recette aléatoire à partir d'un array d'ingrédients
   recette = ingredients.slice(Math.random() * ingredients.length);
-  console.log('RECETTE : ', recette);
   const $recette = document.getElementById('recette');
-  $recette.innerHTML = "<p>Voici les ingredients : " + recette.join(', ') + "</p>"
+  $recette.innerHTML = "<p> ✨👉Votre recette, si vous l'acceptez : " + recette.join(', ') + " 🧾 ✨</p>"
 
+  ingredients.push("ananas");
 
-  // start de la boucle d'animation
+  // Start de la boucle d'animation
   requestAnimationFrame(animLoop);
 }
 
+// Commencer le jeu en cliquant sur le bouton start
 document.getElementById("start-button").onclick = function() {
   startGame();
 };
-
-//function looseGame()
-//{
-//    stopGame();
-//    gameStatus = "gameLost";
-//
-//    displayScore.innerHTML = score;
-//    lost.style.display = "block";
-//    pauseButton.style.display = "none";
-//    restartButton.style.display = "block";
-//}
-
-
-//autostart
-//startGame();
