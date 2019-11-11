@@ -26,7 +26,6 @@ function draw() {
   pizza.paint();
 
   // Générer une recette aléatoire à partir du tableau des ingrédients
-
   if (frames % 100 === 0) {
     let ingredient = ingredients[Math.floor(Math.random() * 8)];
     obstacles.push(new Obstacle(ingredient));
@@ -71,7 +70,6 @@ function draw() {
 }
 
 //Faire bouge+r la pizza
-
 document.onkeydown = function(e) {
   switch (e.keyCode) {
     case 38: // up arrow
@@ -82,17 +80,12 @@ document.onkeydown = function(e) {
       break;
   }
 };
-document.onkeyup = function(e) {
-
-};
 
 function animLoop() {
   frames++;
-
   draw();
 
   // Quand le jeu est perdu
-
   if (!stopgame) {
     requestAnimationFrame(animLoop);
   } else {
@@ -104,7 +97,6 @@ function animLoop() {
   }
 
 // Quand le jeu est gagné
-
   if (stopgame && win) {
     ctx.clearRect(0, 0, W, H);
     ctx.font = "50px Arial";
@@ -115,15 +107,14 @@ function animLoop() {
 }
 
 // Start Game
-
-// Générer une pizza
 function startGame() {
+  // Générer une pizza
   pizza = new PizzaInvader(); // 🍕
 
   // Générer une recette aléatoire à partir d'un array d'ingrédients
   recette = ingredients.slice(Math.random() * ingredients.length);
   const $recette = document.getElementById('recette');
-  $recette.innerHTML = "<p> ✨👉Votre recette, si vous l'acceptez : " + recette.join(', ') + " 🧾 ✨</p>"
+  $recette.innerHTML = "<p> ✨ 👉 Votre recette, si vous l'acceptez : " + recette.join(', ') + " 🧾 ✨</p>"
 
   ingredients.push("ananas");
 
