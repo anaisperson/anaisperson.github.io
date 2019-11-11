@@ -10,7 +10,9 @@ let ingredients = [
   "poivron",
 ];
 let recette = [];
-let gameover;
+let stopgame;
+let win;
+let caughtedIngredients = [];
 //const lost = document.getElementById("lost");
 
 let frames = 0;
@@ -24,26 +26,21 @@ function draw() {
 
   pizza.paint();
 
+  // Générer une recette aléatoire à partir du tableau des ingrédients
+
   if (frames % 100 === 0) {
     let ingredient = ingredients[Math.floor(Math.random() * 7)];
-
-    // tirer au sort parmi la liste ingredients
-
-    
     obstacles.push(new Obstacle(ingredient));
-
-    // Générer une recette aléatoire
-
-    
+    // recette.push(ingredient);
   }
 
   // Obstacles
-
   obstacles.forEach(function(obstacle) {
     obstacle.x -= 10;
     obstacle.paint();
 
     // 1. détecter la collision
+    
 
     obstacles.forEach(function (obstacle, index) {
       let crashed = obstacle.hits(pizza);
@@ -53,10 +50,28 @@ function draw() {
         // si l'obstacle avec lequel ca vient de crasher correspond à un ingredient de la liste (obstacle.ingredient doit etre dans la recette)
         if (recette.includes(obstacle.ingredient)) {
           console.log("continue")
+          if (!caughtedIngredients.includes(obstacle.ingredient)) {
+            caughtedIngredients.push(obstacle.ingredient); 
+          }
+          console.log("caughtedIngredients: ", caughtedIngredients);
+
+          caughtedIngredients = caughtedIngredients.sort(function (a, b) {
+            return a.localeCompare(b);
+          });
+
+          recette = recette.sort(function (a, b) {
+            return a.localeCompare(b);
+          });
+
+          if (JSON.stringify(caughtedIngredients) === JSON.stringify(recette)) {
+            stopgame = true;
+            win = true;
+          }
+          //stopgame = false;
         } // sinon loseGame
         else {
           console.log("loseGame")
-          gameover = true;
+          stopgame = true;
           //looseGame();
         }
 
@@ -88,23 +103,34 @@ function animLoop() {
 
   draw();
 
-  if (!gameover) {
+  if (!stopgame) {
     requestAnimationFrame(animLoop);
   } else {
-    console.log(`gameover final`);
+    console.log('stopgame final');
     ctx.clearRect(0, 0, W, H);
     ctx.font = "50px Arial";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
     ctx.fillText("game over", W/2, H/2);
   }
+
+  if (stopgame && win) {
+    console.log('win');
+      ctx.clearRect(0, 0, W, H);
+      ctx.font = "50px Arial";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText("You're a real pizzaiolo !", W/2, H/2);
+  }
 }
+
+
 
 function startGame() {
   pizza = new PizzaInvader(); // 🍕
 
-  let recette = ingredients.slice(Math.random() * ingredients.length);
-  console.log(recette);
+  recette = ingredients.slice(Math.random() * ingredients.length);
+  console.log('RECETTE : ', recette);
   const $recette = document.getElementById('recette');
   $recette.innerHTML = "<p>Voici les ingredients : " + recette.join(', ') + "</p>"
 

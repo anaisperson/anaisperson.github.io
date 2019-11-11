@@ -1,7 +1,7 @@
 class Obstacle {
   constructor(ingredient) {
     this.ingredient = ingredient;
-    
+
     const img = document.createElement('img');
     img.onload = () => {
       this.img = img;
@@ -32,13 +32,13 @@ class Obstacle {
   }
 }
 
-function looseGame()
-{
-    stopGame();
-    gameStatus = "gameLost";
+// function looseGame()
+// {
+//     stopGame();
+//     gameStatus = "gameLost";
 
-    displayScore.innerHTML = score;
-    lost.style.display = "block";
-    pauseButton.style.display = "none";
-    restartButton.style.display = "block";
-}
+//     displayScore.innerHTML = score;
+//     lost.style.display = "block";
+//     pauseButton.style.display = "none";
+//     restartButton.style.display = "block";
+// }
