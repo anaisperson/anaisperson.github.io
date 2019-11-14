@@ -1,7 +1,9 @@
+// Class Obstacle 
 class Obstacle {
   constructor(ingredient) {
     this.ingredient = ingredient;
-
+    
+    // Définir le format des obstacles
     const img = document.createElement('img');
     img.onload = () => {
       this.img = img;
